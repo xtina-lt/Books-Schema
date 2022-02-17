@@ -9,30 +9,43 @@
 --          ORDER BY column         --
 --   CONCAT_WS('delimeter', x, y)   --
 --------------------------------------
--- Demonstrates complex understanding of Entity Relationship Diagrams(ERDs). 
--- Carries out Structured Language Quieries(SQL). 
--- Shows understanding of: 
--- one-to-one relationships, 
--- many-to-many relationships, 
--- SQL methods (concat_ws), 
--- and many more SQL objectives. 
 
-#  CREATE  # --
--- INSERT INTO authors_books(author_id, book_id) VALUES(1,1), (2,2), (3,3)
+-- # ADMIN DASHBOARD # --
+-- READ ALL
+SELECT likes.id AS id, book_id AS book, title, pages, authors.id AS author, first_name, last_name, name AS who_likes FROM likes
+LEFT JOIN books ON books.id = likes.book_id
+LEFT JOIN authors ON authors.id = likes.author_id
+LEFT JOIN users ON users.id = likes.user_id
+ORDER BY who_likes
+
+-- # USER DASHBOARD # --
+-- # get count of user's likes
+-- SELECT COUNT(likes.id) FROM likes
+-- WHERE user_id = 1
+
+-- # display likes
+-- SELECT likes.id AS like_id, title, book_id, CONCAT_WS(', ', last_name, first_name) AS author, author_id FROM likes
+-- LEFT JOIN books ON books.id = likes.book_id
+-- LEFT JOIN authors ON authors.id = likes.author_id
+-- LEFT JOIN users ON users.id = likes.user_id
+-- WHERE users.id = 1
 
 
--- # UPDATE #--
--- alter column names
--- ALTER TABLE authors_books
--- RENAME COLUMN authors_id TO author_id
--- ALTER TABLE authors_books
--- RENAME COLUMN books_id TO book_id
+-- EXTRA PROJECT IDEA: USER DASHBOARD !!
+-- MODEL IDEA:
+-- results = query
+-- lst = [cls(i) for i in results]
 
+-- CONTROLLER IDEA:
+-- reading list
+-- list_to_send_to_html = []
+-- for i in range(len(input)):
+-- if input[i].title
+--   ltsth.append(input[i].title)
+-- if input[i].author
+--   ltsth.append(input[i].author)
+-- return output =  list_to_send_to_html
 
--- # READ # --
--- books: start
-SELECT books.id, title, pages, CONCAT_WS(' ' ,last_name, first_name) AS author FROM books
--- merge table: join to book
-JOIN authors_books ON books.id = authors_books.book_id
--- authors: join merge table
-JOIN authors ON authors.id = authors_books.author_id
+-- JIJNA IDEA:
+-- for i in output:
+-- {{i}}

@@ -10,8 +10,8 @@
 --------------------------------------
 
 -- #  CREATE  # --
--- INSERT INTO likes() VALUE(),() # create a like coutner for the author -- PY server: generate like, save value, set as val in authors
--- INSERT INTO authors(first_name, last_name, likes_id) VALUES('Paul', 'Deitel', 1), ('Daniel', 'Liang', 2), ('Mark', 'Zegarelli', 3)
+-- INSERT INTO likes(author_id, user_id) VALUE(1,1),(1,2), (2,1), (2,2), (3,1)
+-- INSERT INTO authors(first_name, last_name) VALUES('Paul', 'Deitel'), ('Daniel', 'Liang'), ('Mark', 'Zegarelli')
 
 
 -- # UPDATE #--
@@ -20,6 +20,7 @@
 
 
 -- # READ # --
--- SELECT * FROM likes
-SELECT authors.id, first_name, last_name, count AS likes FROM authors
-JOIN likes ON likes.id = authors.likes_id
+-- SELECT * FROM authors
+SELECT authors.id, first_name, last_name, user_id, count(user_id) AS count FROM authors
+JOIN likes ON authors.id = likes.author_id
+GROUP BY authors.id
